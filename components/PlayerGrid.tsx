@@ -37,43 +37,196 @@ export default function PlayerGrid({ players }: { players: any[] }) {
                     className="w-64 bg-slate-900 border border-slate-700 rounded-lg p-4 text-white placeholder:text-slate-500"
                 />
 
-                <select value={element} onChange={(e) => setElement(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-4">
-                    <option value="">Elemento</option>
-                    <option value="Fuoco">Fuoco</option>
-                    <option value="Montagna">Montagna</option>
-                    <option value="Bosco">Bosco</option>
-                    <option value="Vento">Vento</option>
-                </select>
+                <div className="relative">
+                    <button
+                        onClick={() => setElement(element === "open" ? "" : "open")}
+                        className="bg-slate-900 border border-slate-700 rounded-lg p-4 min-w-[180px] flex items-center justify-between"
+                    >
+                        <span>
+                            {element && element !== "open" ? element : "Elemento"}
+                        </span>
+                        <span>⌄</span>
+                    </button>
 
-                <select value={role} onChange={(e) => setRole(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-4">
-                    <option value="">Ruolo</option>
-                    <option value="Attaccante">FW</option>
-                    <option value="Centrocampista">MF</option>
-                    <option value="Difensore">DF</option>
-                    <option value="Portiere">GK</option>
-                </select>
+                    {element === "open" && (
+                        <div className="absolute z-50 mt-2 w-[180px] bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+                            {[
+                                ["", "Elemento", ""],
+                                ["Fuoco", "Fuoco", "/elements/fire.png"],
+                                ["Montagna", "Montagna", "/elements/mountain.png"],
+                                ["Bosco", "Bosco", "/elements/forest.png"],
+                                ["Vento", "Vento", "/elements/wind.png"],
+                            ].map(([value, label, icon]) => (
+                                <button
+                                    key={label}
+                                    onClick={() => setElement(value)}
+                                    className="w-full flex items-center gap-2 px-4 py-3 hover:bg-orange-500 text-left"
+                                >
+                                    {icon && <img src={icon} alt={label} className="w-5 h-5" />}
+                                    {label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
-                <select
-                    value={team}
-                    onChange={(e) => setTeam(e.target.value)}
-                    className="bg-slate-900 border border-slate-700 rounded-lg p-4"
-                >
-                    <option value="">Squadra</option>
-                    <option value="Raimon">Raimon</option>
-                    <option value="Raimon Japan">Raimon Japan</option>
-                    <option value="Royal Academy">Royal Academy</option>
-                    <option value="Zeus">Zeus</option>
-                    <option value="Alius Academy">Alius Academy</option>
-                </select>
+                <div className="relative">
+                    <button
+                        onClick={() => setRole(role === "open" ? "" : "open")}
+                        className="bg-slate-900 border border-slate-700 rounded-lg p-4 min-w-[150px] flex items-center justify-between"
+                    >
+                        {role && role !== "open" ? (
+                            <img
+                                src={`/roles/${role.toLowerCase()}.png`}
+                                alt={role}
+                                className="h-5 object-contain"
+                            />
+                        ) : (
+                            <span>Ruolo</span>
+                        )}
 
-                <select value={rarity} onChange={(e) => setRarity(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-4">
-                    <option value="">Rarità</option>
-                    <option value="1">★</option>
-                    <option value="2">★★</option>
-                    <option value="3">★★★</option>
-                    <option value="4">★★★★</option>
-                    <option value="5">★★★★★</option>
-                </select>
+                        <span>⌄</span>
+                    </button>
+
+                    {role === "open" && (
+                        <div className="absolute z-50 mt-2 w-[150px] bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+                            {[
+                                ["", "Ruolo", ""],
+                                ["FW", "FW", "/roles/fw.png"],
+                                ["MF", "MF", "/roles/mf.png"],
+                                ["DF", "DF", "/roles/df.png"],
+                                ["GK", "GK", "/roles/gk.png"],
+                            ].map(([value, label, icon]) => (
+                                <button
+                                    key={label}
+                                    onClick={() => setRole(value)}
+                                    className="w-full flex items-center justify-center px-4 py-3 hover:bg-orange-500"
+                                >
+                                    {icon ? (
+                                        <img
+                                            src={icon}
+                                            alt={label}
+                                            className="h-5 object-contain"
+                                        />
+                                    ) : (
+                                        <span>Ruolo</span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="relative">
+                    <button
+                        onClick={() => setTeam(team === "open" ? "" : "open")}
+                        className="bg-slate-900 border border-slate-700 rounded-lg p-4 min-w-[220px] flex items-center justify-between"
+                    >
+                        {team && team !== "open" ? (
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src={teamLogo(team)}
+                                    alt={team}
+                                    className="w-6 h-6 object-contain"
+                                />
+                                <span>{team}</span>
+                            </div>
+                        ) : (
+                            <span>Squadra</span>
+                        )}
+
+                        <span>⌄</span>
+                    </button>
+
+                    {team === "open" && (
+                        <div className="absolute z-50 mt-2 w-[260px] bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+                            {[
+                                ["", "Squadra", ""],
+                                ["Raimon", "Raimon", "/teams/raimon.png"],
+                                ["Raimon Japan", "Raimon Japan", "/teams/raimon-japan.png"],
+                                ["Nazionale Japan", "Nazionale Japan", "/teams/japan-national.png"],
+                                ["Royal Academy", "Royal Academy", "/teams/royal-academy.png"],
+                                ["Inazuma KFC", "Inazuma KFC", "/teams/inazuma-kfc.png"],
+                                ["Kirkwood", "Kirkwood", "/teams/kirkwood.png"],
+                                ["Brainwashing", "Brainwashing", "/teams/brainwashing.png"],
+                                ["Occult", "Occult", "/teams/inazuma-kfc.png"],
+                                ["Otaku", "Otaku", "/teams/otaku.png"],
+                                ["Shuriken", "Shuriken", "/teams/shuriken.png"],
+                                ["Wild", "Wild", "/teams/wild.png"],
+                            ].map(([value, label, icon]) => (
+                                <button
+                                    key={label}
+                                    onClick={() => setTeam(value)}
+                                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-orange-500 text-left"
+                                >
+                                    {icon ? (
+                                        <>
+                                            <img
+                                                src={icon}
+                                                alt={label}
+                                                className="w-6 h-6 object-contain flex-shrink-0"
+                                            />
+                                            <span className="whitespace-nowrap">
+                                                {label}
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <span>Squadra</span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="relative">
+                    <button
+                        onClick={() => setRarity(rarity === "open" ? "" : "open")}
+                        className="bg-slate-900 border border-slate-700 rounded-lg p-4 min-w-[150px] flex items-center justify-between"
+                    >
+                        {rarity && rarity !== "open" ? (
+                            <div className="flex items-center gap-1">
+                                {Array.from({ length: Number(rarity) }).map((_, i) => (
+                                    <img
+                                        key={i}
+                                        src="/icons/star.png"
+                                        alt="Star"
+                                        className="w-4 h-4"
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <span>Rarità</span>
+                        )}
+
+                        <span>⌄</span>
+                    </button>
+
+                    {rarity === "open" && (
+                        <div className="absolute z-50 mt-2 w-[180px] bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+                            {[
+                                ["1", 1],
+                                ["2", 2],
+                                ["3", 3],
+                            ].map(([value, stars]) => (
+                                <button
+                                    key={String(value)}
+                                    onClick={() => setRarity(String(value))}
+                                    className="w-full flex items-center gap-1 px-4 py-3 hover:bg-orange-500"
+                                >
+                                    {Array.from({ length: Number(stars) }).map((_, i) => (
+                                        <img
+                                            key={i}
+                                            src="/icons/star.png"
+                                            alt="Star"
+                                            className="w-4 h-4"
+                                        />
+                                    ))}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
                 <select value={tier} onChange={(e) => setTier(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg p-4">
                     <option value="">Tier List</option>
@@ -157,9 +310,16 @@ export default function PlayerGrid({ players }: { players: any[] }) {
                             </div> */}
 
                             <div className="flex items-center justify-between mt-3">
-                                <span className="text-yellow-400 text-sm">
-                                    {"★".repeat(player.rarity ?? 5)}
-                                </span>
+                                <div className="flex gap-1">
+                                    {Array.from({ length: player.rarity }).map((_, i) => (
+                                        <img
+                                            key={i}
+                                            src="/icons/star.png"
+                                            alt="Star"
+                                            className="w-4 h-4"
+                                        />
+                                    ))}
+                                </div>
 
                                 <span className="text-3xl font-black text-orange-400">
                                     {player.tier}
@@ -215,23 +375,41 @@ function roleColor(role: string) {
 
 
 function teamLogo(team: string) {
-    switch (team) {
-        case "Raimon":
-            return "/teams/raimon.png";
+  switch (team) {
+    case "Raimon":
+      return "/teams/raimon.png";
 
-        case "Raimon Japan":
-            return "/teams/raimon-japan.png";
+    case "Raimon Japan":
+      return "/teams/raimon-japan.png";
 
-        case "Royal Academy":
-            return "/teams/royal-academy.png";
+    case "Royal Academy":
+      return "/teams/royal-academy.png";
 
-        case "Zeus":
-            return "/teams/zeus.png";
+    case "Kirkwood":
+      return "/teams/kirkwood.png";
 
-        case "Alius Academy":
-            return "/teams/alius-academy.png";
+    case "Wild":
+      return "/teams/wild.png";
 
-        default:
-            return "";
-    }
+    case "Shuriken":
+      return "/teams/shuriken.png";
+
+    case "Occult":
+      return "/teams/occult.png";
+
+    case "Otaku":
+      return "/teams/otaku.png";
+
+    case "Inazuma KFC":
+      return "/teams/inazuma-kfc.png";
+
+    case "Brainwashing":
+      return "/teams/brainwashing.png";
+
+    case "Japan National":
+      return "/teams/japan-national.png";
+
+    default:
+      return "/teams/raimon.png";
+  }
 }
