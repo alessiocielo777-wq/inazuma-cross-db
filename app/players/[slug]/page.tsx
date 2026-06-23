@@ -1,3 +1,4 @@
+
 import PlayerStats from "@/components/PlayerStats";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";

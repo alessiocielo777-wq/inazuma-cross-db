@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 //import PlayerGrid from "@/components/PlayerGrid";
 
@@ -9,37 +10,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
-      <nav className="home-nav">
-        <div className="home-nav-inner">
-          <a href="/">
-            <img
-              src="/logo.png"
-              alt="Inazuma Cross"
-              style={{
-                width: "260px",
-                position: "absolute",
-                left: "10px",
-                top: "5px",
-                zIndex: 50,
-              }}
-            />
-          </a>
-
-          <div className="home-menu">
-            <a className="active">🏠 Home</a>
-            <a href="/players">👤 Personaggi</a>
-            <a>📜 Missioni</a>
-            <a>⚽ Tecniche</a>
-            <a>👥 Squadre</a>
-            <a>🏆 Tier List</a>
-            <a>📖 Guide</a>
-
-            <div className="nav-search">
-              <input placeholder="Cerca..." />
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className="home-full">
         <div className="hero-full">
