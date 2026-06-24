@@ -143,7 +143,7 @@ export default function PlayerGrid({ players }: { players: any[] }) {
                             {[
                                 ["", "Squadra", ""],
                                 ["Raimon", "Raimon", "/teams/raimon.png"],
-                                ["Raimon Japan", "Raimon Japan", "/teams/raimon-japan.png"],
+                                ["Inazuma Japan", "Inazuma Japan", "/teams/inazuma-japan.png"],
                                 ["Nazionale Japan", "Nazionale Japan", "/teams/japan-national.png"],
                                 ["Royal Academy", "Royal Academy", "/teams/royal-academy.png"],
                                 ["Inazuma KFC", "Inazuma KFC", "/teams/inazuma-kfc.png"],
@@ -379,8 +379,8 @@ function teamLogo(team: string) {
     case "Raimon":
       return "/teams/raimon.png";
 
-    case "Raimon Japan":
-      return "/teams/raimon-japan.png";
+    case "Inazuma Japan":
+      return "/teams/inazuma-japan.png";
 
     case "Royal Academy":
       return "/teams/royal-academy.png";
