@@ -3,6 +3,8 @@ import PlayerPassives from "@/components/PlayerPassives";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
+/*test*/
+
 export default async function PlayerPage({
     params,
 }: {
